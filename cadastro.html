@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Cadastro de Roupas</title>
+    <!-- Bootswatch Theme -->
+    <link rel="stylesheet" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <style type="text/css">
+        body {
+            background-image: url('t.jpg');
+            background-size: cover;
+            background-position: center center;
+            background-color: #fafafa;
+        }
+
+        .navbar {
+            background-color: #ffdede;
+        }
+
+        .navbar-brand {
+            color: #6a0000;
+        }
+
+        .navbar-brand:hover {
+            color: #5a0000;
+        }
+
+        .card-header {
+            background-color: #6a0000;
+            color: #ffdede;
+        }
+
+        .btn-primary {
+            background-color: #6a0000;
+            border-color: #6a0000;
+        }
+
+        .btn-primary:hover {
+            background-color: #5a0000;
+            border-color: #5a0000;
+        }
+
+        .form-control {
+            border-color: #6a0000;
+            border-radius: 0.25rem;
+        }
+
+        .form-control:focus {
+            border-color: #5a0000;
+            box-shadow: 0 0 0 0.2rem rgba(90, 0, 0, 0.25);
+        }
+
+        .card {
+            border: 1px solid #6a0000;
+            border-radius: 0.5rem;
+        }
+
+        .highlight {
+            font-weight: bold;
+        }
+
+        .container {
+            margin-top: 2rem;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .form-group input {
+            margin-bottom: 1rem;
+        }
+
+        .form-group input:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .btn-block {
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-light">
+        <a class="navbar-brand highlight" href="#">Cadastro de Roupas</a>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                <div class="card">
+                    <div class="card-header">
+                        <h4>Adicione um Novo Produto</h4>
+                    </div>
+                    <form id="product-form" class="card-body">
+                        <div class="form-group">
+                            <label for="name">Nome do Produto</label>
+                            <input type="text" id="name" placeholder="Nome do Produto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="price">Preço do Produto</label>
+                            <input type="number" id="price" step="0.01" placeholder="Preço do Produto" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Descrição do Produto</label>
+                            <input type="text" id="description" placeholder="Descrição do Produto" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Salvar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div id="product-list" class="col-md-8 mx-auto mt-4">
+            <!-- Lista de Produtos será adicionada aqui dinamicamente -->
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        document.getElementById('product-form').addEventListener('submit', function (event) {
+            event.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const price = document.getElementById('price').value;
+            const description = document.getElementById('description').value;
+
+            if (name && price && description) {
+                const productList = document.getElementById('product-list');
+
+                const productDiv = document.createElement('div');
+                productDiv.className = 'card mb-3';
+                productDiv.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${name}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">R$ ${price}</h6>
+                        <p class="card-text">${description}</p>
+                    </div>
+                `;
+
+                productList.appendChild(productDiv);
+
+                document.getElementById('product-form').reset();
+            } else {
+                alert('Por favor, preencha todos os campos.');
+            }
+        });
+    </script>
+</body>
+
+</html>
